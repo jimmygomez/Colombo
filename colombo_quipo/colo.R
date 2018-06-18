@@ -50,7 +50,31 @@ ks.test(dlemos$calificacion, pnorm, mean(dlemos$calificacion), sd(dlemos$calific
 
 ks.test(dlemos$cientificas, pnorm, mean(dlemos$cientificas), sd(dlemos$cientificas))
 
+######## installar (nortest. ) 
+library(nortest)
+lillie.test(dlemos$calificacion)
+#####prueba de correcion Ks
+library(agricolae)
+data(corn)
+attach(corn)
+str(corn)
+comparison<-kruskal(observation,method,group=TRUE, main="corn")
+comparison<-kruskal(observation,method,p.adj="bon",group=FALSE, main="corn")
+detach(corn)
 
+
+####dlemos
+attach(dlemos)
+str(dlemos)
+compa<-kruskal(calificacion,prog,group=TRUE, main="dlemos")
+compa<-kruskal(calificacion,prog,p.adj="bon",group=FALSE, main="dlemos")
+compa
+out<-with(dlemos,Median.test(calificacion,prog,console=FALSE))
+out$groups
+out$medians
+plot(out,ylim=c(0,30),main = "calificaciones")
+
+#######ejemplos####
 library(class)
 library(e1071)## carga el papel probabilistico
 
